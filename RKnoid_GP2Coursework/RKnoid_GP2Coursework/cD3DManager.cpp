@@ -55,6 +55,7 @@ bool cD3DManager::initD3DManager(HWND wndHandle)        // Initialise cD3DManage
 	d3dpp.Windowed = TRUE;
 	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
 	d3dpp.BackBufferFormat = D3DFMT_UNKNOWN;
+	d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_ONE;
 	d3dpp.BackBufferCount = 1;
 	d3dpp.BackBufferHeight = 600;
 	d3dpp.BackBufferWidth = 800;

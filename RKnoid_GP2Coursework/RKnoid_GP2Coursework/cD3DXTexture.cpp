@@ -91,4 +91,21 @@ D3DXIMAGE_INFO cD3DXTexture::getTextureInfo() 		// return information about the 
 {
 	return cD3DXTexture::aTextureInfo;
 }
-
+/*
+=================
+- Return width of texture.
+=================
+*/
+int cD3DXTexture::getTWidth() 						// Return width of texture;
+{
+	return aTextureInfo.Width;
+}
+/*
+=================
+- Return height of texture.
+=================
+*/
+int cD3DXTexture::getTHeight() 						// Return height of texture;
+{
+	return aTextureInfo.Height;
+}

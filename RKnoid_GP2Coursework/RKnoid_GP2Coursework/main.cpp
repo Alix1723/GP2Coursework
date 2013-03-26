@@ -23,7 +23,7 @@ static cD3DManager* d3dMgr = cD3DManager::getInstance();
 // Get a reference to the DirectX Sprite renderer Manager 
 static cD3DXSpriteMgr* d3dxSRMgr = cD3DXSpriteMgr::getInstance();
 	
-D3DXVECTOR2 paddleTranslate = D3DXVECTOR2(300,300);
+D3DXVECTOR2 paddleTranslate = D3DXVECTOR2(640,400);
 
 
 /*
@@ -43,7 +43,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			{
 				if (wParam == VK_LEFT&&paddleTranslate.x>=0)
 				{
-					
+					paddleTranslate.x -= 5.0f;
 					return 0;
 				}
 				if (wParam == VK_RIGHT&&paddleTranslate.x<=736)
@@ -137,10 +137,16 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 	LPDIRECT3DSURFACE9 theBackbuffer = NULL;  // This will hold the back buffer
 	
 	//Creates a new Paddle object
-	cPaddle playerPaddle(D3DXVECTOR3(300.0f,300.0f,0.0f),D3DXVECTOR2(1.0f,1.0f));
+	//cPaddle playerPaddle(D3DXVECTOR3(300.0f,300.0f,0.0f),D3DXVECTOR2(1.0f,1.0f));
+
+	cSprite playerSpritePaddle(D3DXVECTOR3(300.0f,300.0f,0.0f),d3dMgr->getTheD3DDevice(),"sprites\\Paddle.png");
+	
+	playerSpritePaddle.setSpriteCentre();
 
 	MSG msg;
 	ZeroMemory( &msg, sizeof( msg ) );
+
+	D3DXMATRIX paddleMatrix = playerSpritePaddle.getSpriteTransformMatrix();
 
 	// Create the background surface
 	aSurface = d3dMgr->getD3DSurfaceFromFile("sprites\\BG1.png");
@@ -155,9 +161,14 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 		}
 		else
 		{
-			// Game code goes here
 			
-	
+
+
+			// Game code goes here
+			D3DXMatrixTransformation2D(&paddleMatrix,NULL,NULL,NULL,NULL,NULL,&paddleTranslate);
+			
+			playerSpritePaddle.setSpritePos(D3DXVECTOR3(paddleMatrix._41,paddleMatrix._42,0));
+
 			d3dMgr->beginRender();
 
 			theBackbuffer = d3dMgr->getTheBackBuffer();
@@ -167,10 +178,10 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 			d3dMgr->releaseTheBackbuffer(theBackbuffer);
 
 			d3dxSRMgr->beginDraw();
+			
+			d3dxSRMgr->setTheTransform(paddleMatrix);
 
-			d3dxSRMgr->setTheTransform(playerPaddle.getMatrix());
-
-			d3dxSRMgr->drawSprite(playerPaddle.getSpriteTex(),NULL,NULL,NULL,0xFFFFFFFF);
+			d3dxSRMgr->drawSprite(playerSpritePaddle.getTexture(),NULL,NULL,NULL,0xFFFFFFFF);
 			
 			d3dxSRMgr->endDraw();
 

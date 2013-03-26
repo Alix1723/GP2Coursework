@@ -15,43 +15,43 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\..\Alix%27s folder\University\2\RKnoid_GP2Coursework\RKnoid_GP2Coursework\cD3DManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\..\Alix%27s folder\University\2\RKnoid_GP2Coursework\RKnoid_GP2Coursework\GameConstants.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\..\Alix%27s folder\University\2\RKnoid_GP2Coursework\RKnoid_GP2Coursework\cSprite.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\..\Alix%27s folder\University\2\RKnoid_GP2Coursework\RKnoid_GP2Coursework\cD3DXTexture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\..\Alix%27s folder\University\2\RKnoid_GP2Coursework\RKnoid_GP2Coursework\cD3DXSpriteMgr.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\..\Alix%27s folder\University\2\RKnoid_GP2Coursework\RKnoid_GP2Coursework\cPaddle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClCompile Include="cD3DManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cD3DXSpriteMgr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cD3DXTexture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cPaddle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cSprite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\Alix%27s folder\University\2\RKnoid_GP2Coursework\RKnoid_GP2Coursework\cD3DManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\Alix%27s folder\University\2\RKnoid_GP2Coursework\RKnoid_GP2Coursework\cD3DXSpriteMgr.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\Alix%27s folder\University\2\RKnoid_GP2Coursework\RKnoid_GP2Coursework\cD3DXTexture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\Alix%27s folder\University\2\RKnoid_GP2Coursework\RKnoid_GP2Coursework\cSprite.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\Alix%27s folder\University\2\RKnoid_GP2Coursework\RKnoid_GP2Coursework\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\Alix%27s folder\University\2\RKnoid_GP2Coursework\RKnoid_GP2Coursework\cPaddle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ClInclude Include="cD3DManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cD3DXSpriteMgr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cD3DXTexture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cPaddle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cSprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameConstants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

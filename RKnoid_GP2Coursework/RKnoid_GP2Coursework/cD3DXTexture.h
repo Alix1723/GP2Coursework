@@ -21,5 +21,7 @@ public:
 	LPDIRECT3DTEXTURE9 getTexture();       // return the texture.
 	bool setTextureInfo(LPCSTR theImageFilename); // set the image info based on the filename supplied.
 	D3DXIMAGE_INFO getTextureInfo();		// return information about the image loaded.
+	int getTWidth();						// Return width of texture;
+	int getTHeight();						// Return height of texture;
 };
 #endif
