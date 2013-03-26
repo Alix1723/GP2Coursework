@@ -24,9 +24,6 @@
     <ClCompile Include="cD3DXTexture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cPaddle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="cSprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -42,9 +39,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="cD3DXTexture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="cPaddle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="cSprite.h">

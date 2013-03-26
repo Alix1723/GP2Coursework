@@ -57,8 +57,8 @@ bool cD3DManager::initD3DManager(HWND wndHandle)        // Initialise cD3DManage
 	d3dpp.BackBufferFormat = D3DFMT_UNKNOWN;
 	d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_ONE;
 	d3dpp.BackBufferCount = 1;
-	d3dpp.BackBufferHeight = 600;
-	d3dpp.BackBufferWidth = 800;
+	d3dpp.BackBufferHeight = 700;
+	d3dpp.BackBufferWidth = 700;
 	d3dpp.hDeviceWindow = wndHandle;
 
 	// Create a default DirectX device
@@ -127,8 +127,8 @@ LPDIRECT3DSURFACE9 cD3DManager::getD3DSurfaceFromFile(LPCSTR theFilename) // cre
 	HRESULT hResult;
 	LPDIRECT3DSURFACE9 surface;		// the Direct3D surface
 
-	hResult = pd3dDevice->CreateOffscreenPlainSurface(800, // the width of the surface to create
-										  600, // the height of the surface to create
+	hResult = pd3dDevice->CreateOffscreenPlainSurface(700, // the width of the surface to create
+										  700, // the height of the surface to create
 										  D3DFMT_X8R8G8B8, // the surface format 
 										  D3DPOOL_SYSTEMMEM, // the memory pool to use *IMPORTANT* when dealing with surfaces
 										  &surface, // holds the resulting surface

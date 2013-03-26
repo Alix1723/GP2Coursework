@@ -14,7 +14,6 @@
     <ClCompile Include="cD3DManager.cpp" />
     <ClCompile Include="cD3DXSpriteMgr.cpp" />
     <ClCompile Include="cD3DXTexture.cpp" />
-    <ClCompile Include="cPaddle.cpp" />
     <ClCompile Include="cSprite.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -22,7 +21,6 @@
     <ClInclude Include="cD3DManager.h" />
     <ClInclude Include="cD3DXSpriteMgr.h" />
     <ClInclude Include="cD3DXTexture.h" />
-    <ClInclude Include="cPaddle.h" />
     <ClInclude Include="cSprite.h" />
     <ClInclude Include="GameConstants.h" />
   </ItemGroup>
