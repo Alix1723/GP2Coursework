@@ -134,6 +134,19 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 	cSprite playerPaddle(D3DXVECTOR3(0.0f,0.0f,0.0f),d3dMgr->getTheD3DDevice(),"sprites\\Paddle.png");
 
 	cSprite playerBall(D3DXVECTOR3(0.0f,0.0f,0.0f),d3dMgr->getTheD3DDevice(),"sprites\\Ball.png");
+	//Generate a grid of breakable blocks
+
+	//cSprite brickGrid[7][3];(D3DXVECTOR3(10,10,0),d3dMgr->getTheD3DDevice(),"sprites\\Brick_A.png");
+
+	cSprite brickArray[32];
+
+	for (int i=0;i<8;i++)
+	{
+		for(int j=0;j<4;j++)
+		{
+			brickArray[i+(j*8)] = cSprite(D3DXVECTOR3(i*50,j*30,0),d3dMgr->getTheD3DDevice(),"sprites\\Brick_A.png");
+		}
+	}
 
 	playerPaddle.setSpriteCentre();
 
@@ -150,6 +163,9 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 
 	D3DXMATRIX ballMatrix = playerBall.getSpriteTransformMatrix();
 
+	
+
+
 	// Create the background surface
 	aSurface = d3dMgr->getD3DSurfaceFromFile("sprites\\BG1.png");
 
@@ -165,7 +181,6 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 		{
 			//Move paddle left/right
 			paddleTranslate.x += (GetAsyncKeyState(VK_LEFT) - GetAsyncKeyState(VK_RIGHT))/2000;
-
 
 			//Clamp paddle position to the window
 			if(paddleTranslate.x<0){paddleTranslate.x=0;}
@@ -205,7 +220,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 				ballTranslate = paddleTranslate + D3DXVECTOR2(playerPaddle.getSTWidth()/2 - playerBall.getSTWidth()/2,-21);
 			}
 
-
+		
 			D3DXMatrixTransformation2D(&paddleMatrix,NULL,NULL,NULL,NULL,NULL,&paddleTranslate);
 
 			D3DXMatrixTransformation2D(&ballMatrix,NULL,NULL,NULL,NULL,NULL,&ballTranslate);
@@ -232,6 +247,15 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 				d3dxSRMgr->setTheTransform(ballMatrix);
 
 				d3dxSRMgr->drawSprite(playerBall.getTexture(),NULL,NULL,NULL,0xFFFFFFFF);
+
+				
+				//LAGGY
+				for(int k=0;k<32;k++){ d3dxSRMgr->setTheTransform(brickArray[k].getSpriteTransformMatrix());
+
+				d3dxSRMgr->drawSprite(brickArray[k].getTexture(),NULL,NULL,NULL,0xFFFFFFFF);}
+				
+				
+
 			
 			
 			d3dxSRMgr->endDraw();
