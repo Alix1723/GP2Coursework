@@ -19,6 +19,9 @@ static cD3DXSpriteMgr* d3dxSRMgr = cD3DXSpriteMgr::getInstance();
 
 float ballSpeed = 5.0f;
 
+float xAxis = 0;
+float xSmoothAxis = 0;
+
 D3DXVECTOR2 paddleTranslate = D3DXVECTOR2(320,500);
 D3DXVECTOR2 ballTranslate = D3DXVECTOR2(320,400);
 D3DXVECTOR2 brickTranslate = D3DXVECTOR2(320,100);
@@ -26,7 +29,6 @@ D3DXVECTOR2 brickTranslate = D3DXVECTOR2(320,100);
 D3DXVECTOR2 ballDirection = D3DXVECTOR2(ballSpeed,-ballSpeed);
 
 bool ballIsActive=false;
-
 
 /*
 ==================================================================
@@ -133,37 +135,39 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 
 	LPDIRECT3DSURFACE9 aSurface;				// the Direct3D surface
 	LPDIRECT3DSURFACE9 theBackbuffer = NULL;  // This will hold the back buffer
-	
-	//Creates a new Paddle object
-	//cPaddle playerPaddle(D3DXVECTOR3(300.0f,300.0f,0.0f),D3DXVECTOR2(1.0f,1.0f));
 
 	cSprite playerPaddle(D3DXVECTOR3(0.0f,0.0f,0.0f),d3dMgr->getTheD3DDevice(),"sprites\\Paddle.png");
 
 	cSprite playerBall(D3DXVECTOR3(0.0f,0.0f,0.0f),d3dMgr->getTheD3DDevice(),"sprites\\Ball.png");
 
-	cSprite testBrick(D3DXVECTOR3(350,100,0),d3dMgr->getTheD3DDevice(),"sprites\\Brick_A.png");
+	/*cSprite testBrick(D3DXVECTOR3(350,100,0),d3dMgr->getTheD3DDevice(),"sprites\\Brick_A.png");
 	testBrick.setSpriteCentre();
-
+	*/
 	//Generate a grid of breakable blocks
 
-	//cSprite brickGrid[7][3];(D3DXVECTOR3(10,10,0),d3dMgr->getTheD3DDevice(),"sprites\\Brick_A.png");
+	cSprite brickArray[48];
 
-	//cSprite brickArray[32];
-
-	/*for (int i=0;i<8;i++)
-	{
-		for(int j=0;j<4;j++)
+		for (int i=0;i<12;i++)
 		{
-			brickArray[i+(j*8)] = cSprite(D3DXVECTOR3(i*50,j*30,0),d3dMgr->getTheD3DDevice(),"sprites\\Brick_A.png");
+			for(int j=0;j<4;j++)
+			{
+				brickArray[i+(j*12)] = cSprite(D3DXVECTOR3(50+(i*50),50+(j*30),0),d3dMgr->getTheD3DDevice(),"sprites\\Brick_A.png");
+			}
 		}
-	}*/
 
 	playerPaddle.setSpriteCentre();
 
 	playerBall.setSpriteCentre();
 
-	testBrick.setSpriteCentre();
-	
+	//testBrick.setSpriteCentre();
+
+	__int64 freq = 0;
+	float sPC = 1.0f/(float)freq;
+	__int64 currentTime = 0;
+	__int64 prevTime = 0;
+	float numFrames = 0.0f;
+	float timeElapsed = 0.0f;
+	float frameRate = 1.0f/30.0f;
 
 	MSG msg;
 	ZeroMemory( &msg, sizeof( msg ) );
@@ -172,8 +176,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 
 	D3DXMATRIX ballMatrix = playerBall.getSpriteTransformMatrix();
 	
-	D3DXMATRIX brickMatrix = testBrick.getSpriteTransformMatrix();
-
+	//D3DXMATRIX brickMatrix = testBrick.getSpriteTransformMatrix();
 
 	// Create the background surface
 	aSurface = d3dMgr->getD3DSurfaceFromFile("sprites\\BG1.png");
@@ -189,8 +192,30 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 		else
 		{
 			//Move paddle left/right
-			paddleTranslate.x += (GetAsyncKeyState(VK_LEFT) - GetAsyncKeyState(VK_RIGHT))/2000;
+			if(GetAsyncKeyState(VK_LEFT) - GetAsyncKeyState(VK_RIGHT)<0)
+			{
+				xAxis=-1;
+			}
+			else if(GetAsyncKeyState(VK_LEFT) - GetAsyncKeyState(VK_RIGHT)>0)
+			{
+				xAxis=1;
+			}
+			else
+			{
+				xAxis=0;
+			}
 
+			/*if(xSmoothAxis<xAxis){xSmoothAxis+=0.1f;}
+			if(xSmoothAxis>xAxis){xSmoothAxis-=0.1f;}*/
+
+			paddleTranslate.x += xAxis*8;
+
+
+			QueryPerformanceCounter((LARGE_INTEGER*)&currentTime);
+			float dt = (currentTime - prevTime)*sPC;
+			timeElapsed +=dt;
+
+			if(timeElapsed>frameRate){
 			//Clamp paddle position to the window
 			if(paddleTranslate.x<0){paddleTranslate.x=0;}
 			if(paddleTranslate.x>700 - playerPaddle.getSTWidth()){paddleTranslate.x=700 - playerPaddle.getSTWidth();}
@@ -230,7 +255,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 			}
 
 			//Check for brick collisions
-			if(ballTranslate.x+playerBall.getSTWidth() > brickTranslate.x &&
+			/*if(ballTranslate.x+playerBall.getSTWidth() > brickTranslate.x &&
 				ballTranslate.x < brickTranslate.x+testBrick.getSTWidth() &&
 				ballTranslate.y+playerBall.getSTHeight() > brickTranslate.y &&
 				ballTranslate.y < brickTranslate.y+testBrick.getSTHeight())
@@ -239,20 +264,20 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 				D3DXVECTOR2 nVec;
 				D3DXVec2Normalize(&nVec,&dVec);
 				 ballDirection = nVec * ballSpeed;
-			}
+			}*/
 
-		
 			D3DXMatrixTransformation2D(&paddleMatrix,NULL,NULL,NULL,NULL,NULL,&paddleTranslate);
 
 			D3DXMatrixTransformation2D(&ballMatrix,NULL,NULL,NULL,NULL,NULL,&ballTranslate);
 			
-			D3DXMatrixTransformation2D(&brickMatrix,NULL,NULL,NULL,NULL,NULL,&brickTranslate);
+			//D3DXMatrixTransformation2D(&brickMatrix,NULL,NULL,NULL,NULL,NULL,&brickTranslate);
 
 			playerPaddle.setSpritePos(D3DXVECTOR3(paddleMatrix._41,paddleMatrix._42,0));
 
 			playerBall.setSpritePos(D3DXVECTOR3(ballMatrix._41,ballMatrix._42,0));
 
 			//RENDERING
+			
 			d3dMgr->beginRender();
 
 			theBackbuffer = d3dMgr->getTheBackBuffer();
@@ -271,23 +296,25 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 
 				d3dxSRMgr->drawSprite(playerBall.getTexture(),NULL,NULL,NULL,0xFFFFFFFF);
 
-				d3dxSRMgr->setTheTransform(brickMatrix);
+				//d3dxSRMgr->setTheTransform(brickMatrix);
 
-				d3dxSRMgr->drawSprite(testBrick.getTexture(),NULL,NULL,NULL,0xFFFFFFFF);
-
+				//d3dxSRMgr->drawSprite(testBrick.getTexture(),NULL,NULL,NULL,0xFFFFFFFF);
 				
 				//LAGGY
-				/*for(int k=0;k<32;k++){ d3dxSRMgr->setTheTransform(brickArray[k].getSpriteTransformMatrix());
+					//for(int k=0;k<48;k++){ d3dxSRMgr->setTheTransform(brickArray[k].getSpriteTransformMatrix());
 
-				d3dxSRMgr->drawSprite(brickArray[k].getTexture(),NULL,NULL,NULL,0xFFFFFFFF);}
+					//d3dxSRMgr->drawSprite(brickArray[k].getTexture(),NULL,NULL,NULL,0xFFFFFFFF);
 				
-				*/
-
-			
-			
+				}
 			d3dxSRMgr->endDraw();
 
 			d3dMgr->endRender();
+			
+			timeElapsed=0.0f;
+			
+			}
+
+			prevTime = currentTime;
 		}
 	}
 	d3dxSRMgr->cleanUp();
