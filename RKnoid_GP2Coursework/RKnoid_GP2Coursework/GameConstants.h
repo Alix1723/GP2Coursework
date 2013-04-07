@@ -5,6 +5,8 @@
 #include <windows.h>
 #include <d3d9.h>
 #include <d3dx9.h>
+#include <XAudio2.h>
+#include "SDKwavefile.h"
 
 #include <iostream>
 #include <string>
@@ -12,6 +14,14 @@
 #include <algorithm>
 #include <ctime>
 #include <cstdlib>
+#include <strsafe.h>
+
+
+//Game constants
+const int rows = 4;
+const int columns = 12;
+const int brickArraySize = rows*columns;
+const int paddleSpeed = 10;
 
 
 #endif

@@ -14,7 +14,7 @@ cBrick::cBrick(D3DXVECTOR3 sPosition,  LPDIRECT3DDEVICE9 pd3dDevice, LPCSTR theF
 	cBrick::brickSprite = cSprite(sPosition,pd3dDevice,theFilename);
 	cBrick::hits = iHits;
 	cBrick::brickSprite.setSpriteCentre();
-	cBrick::brickCentre = (D3DXVECTOR2)sPosition + D3DXVECTOR2(24,24);
+	cBrick::brickCentre = (D3DXVECTOR2)sPosition + D3DXVECTOR2(16,2);
 	cBrick::alive = true;
 }
 
