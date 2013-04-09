@@ -1,15 +1,22 @@
-/*
-Class file for cSceneManager.
-*/
 #include "cSceneManager.h"
 #include "cD3DManager.h"
+
+/*
+====
+Class file for the game's scene manager.
+====
+*/
+
+
 cSceneManager* cSceneManager::mgrInstance = NULL;
 
+//Default constructor.
 cSceneManager::cSceneManager()
 {
 
 }
 
+//Singleton pattern implementation.
 cSceneManager* cSceneManager::getInstance()
 {
 	if(mgrInstance == NULL)
@@ -19,6 +26,7 @@ cSceneManager* cSceneManager::getInstance()
 	return cSceneManager::mgrInstance;
 }
 
+//Setup the initial state of the scene manager.
 bool cSceneManager::initializeScnMgr()
 {
 	cD3DManager* d3dMgr = cD3DManager::getInstance();
@@ -27,6 +35,7 @@ bool cSceneManager::initializeScnMgr()
 	
 	aSurface = d3dMgr->getD3DSurfaceFromFile("sprites\\menuBG.png");
 
+	//Brick array sizes are extremely limited for performance reasons
 
 	/*
 	===
@@ -99,11 +108,13 @@ bool cSceneManager::initializeScnMgr()
 	return true;
 }
 
+//Return what scene is currently active
 sceneID cSceneManager::getCurrentScene()
 {
 	return currentScene;
 }
 
+//Return the current background surface for the scene
 LPDIRECT3DSURFACE9 cSceneManager::getBackgroundSurface()
 {
 	{
@@ -111,12 +122,13 @@ LPDIRECT3DSURFACE9 cSceneManager::getBackgroundSurface()
 	}
 }
 
+//Get the array length for the scene's bricks (for looping through them)
 int cSceneManager::getBrickArrayLength()
 {
 	if(currentScene==LVL1)
 	{return 4;}
 	else if(currentScene==LVL2)
-	{return 12;}
+	{return 4;}
 	else if(currentScene==LVL3)
 	{return 4;}
 	else if(currentScene==LVL4)
@@ -127,6 +139,7 @@ int cSceneManager::getBrickArrayLength()
 	{return 0;}
 }
 
+//Returns this scene's arrangement of breakable bricks.
 cBrick* cSceneManager::getBrickArray()
 {
 	if(currentScene==LVL1)
@@ -143,6 +156,7 @@ cBrick* cSceneManager::getBrickArray()
 	{return emptyArray;}
 }
 
+//Advance to the next scene; if it's the end, loop back to the beginning.
 void cSceneManager::nextScene(int game)
 {
 	cD3DManager* d3dMgr = cD3DManager::getInstance();

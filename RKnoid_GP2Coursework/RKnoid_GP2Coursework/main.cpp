@@ -387,6 +387,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 											//Destroy and recreate the SFX player
 											//audSoundEffects.~cXAudio();
 											//audioExists=false;
+											//Or don't because it arses everything up
 
 										if(sceneMgr->getCurrentScene()==LVL5){
 											gEnd=true;
