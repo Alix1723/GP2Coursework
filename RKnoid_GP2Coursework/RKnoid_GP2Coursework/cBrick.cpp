@@ -1,4 +1,9 @@
 #include "cBrick.h"
+#include "cD3DManager.h"
+#include <sstream>
+/*
+Definition for the cBrick class.
+*/
 
 cBrick::cBrick()
 {
@@ -54,12 +59,23 @@ float cBrick::checkCollisionCoarse(D3DXVECTOR2 bPos)
 
 void cBrick::hitBrick()
 {
+	cD3DManager* d3dMgr = cD3DManager::getInstance();
+
 	cBrick::hits--;
-	
+
 	if(cBrick::hits<=0)
 	{
 		alive=false;
 	}
+	else
+	{
+	std::ostringstream filepath;
+
+	filepath << "sprites\\Brick_" << hits << ".png";
+
+	cBrick::brickSprite.setTexture(d3dMgr->getTheD3DDevice(),filepath.str().c_str());
+	}
+	
 }
 
 bool cBrick::isAlive()

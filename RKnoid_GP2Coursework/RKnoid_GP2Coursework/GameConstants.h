@@ -16,11 +16,10 @@
 #include <cstdlib>
 #include <strsafe.h>
 
-
 //Game constants
-const int rows = 4;
-const int columns = 12;
-const int brickArraySize = rows*columns;
+//const int rows = 3;
+//const int columns = 3;
+//const int brickArraySize = rows*columns;
 const int paddleSpeed = 10;
 
 

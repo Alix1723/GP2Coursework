@@ -16,6 +16,7 @@
     <ClCompile Include="cD3DXFont.cpp" />
     <ClCompile Include="cD3DXSpriteMgr.cpp" />
     <ClCompile Include="cD3DXTexture.cpp" />
+    <ClCompile Include="cSceneManager.cpp" />
     <ClCompile Include="cSprite.cpp" />
     <ClCompile Include="cXAudio.cpp" />
     <ClCompile Include="main.cpp" />
@@ -26,6 +27,7 @@
     <ClInclude Include="cD3DXFont.h" />
     <ClInclude Include="cD3DXSpriteMgr.h" />
     <ClInclude Include="cD3DXTexture.h" />
+    <ClInclude Include="cSceneManager.h" />
     <ClInclude Include="cSprite.h" />
     <ClInclude Include="cXAudio.h" />
     <ClInclude Include="GameConstants.h" />

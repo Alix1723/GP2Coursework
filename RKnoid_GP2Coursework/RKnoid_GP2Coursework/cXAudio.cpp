@@ -98,4 +98,6 @@ void cXAudio::playSound(LPWSTR theFilename, bool pLoop )					// Play sound
 		mSourceVoice->SubmitSourceBuffer(&buffer);
 		mSourceVoice->Start(0, XAUDIO2_COMMIT_NOW );
 	}
+
+	
 }
