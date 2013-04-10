@@ -37,6 +37,10 @@
   <ItemGroup>
     <ResourceCompile Include="GameResources.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7B3D5CB4-3C00-43A2-94BD-4F8514B6FD3F}</ProjectGuid>
     <RootNamespace>RKnoid_GP2Coursework</RootNamespace>
