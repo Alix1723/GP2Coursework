@@ -330,7 +330,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 						if(pLives<=0)
 						{
 							gEnd=true;
-							break;
+							sceneMgr->nextScene(1);
 						}
 					}
 
